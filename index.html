@@ -12,6 +12,27 @@
         <div class="settings-panel">
             <label for="turtleCount">一次性抽取乌龟数量：</label>
             <input type="number" id="turtleCount" v-model.number="drawCount" min="1">
+            
+            <label for="wishColor">选择许愿颜色：</label>
+            <select id="wishColor" v-model="wishColor">
+                <option v-for="color in colorNames" :key="color" :value="color">
+                    {{ color }}
+                </option>
+            </select>
+            <div class="color-preview" :style="{ backgroundColor: wishColor }"></div>
+            
+            <label for="whishAward">许愿色奖励：</label>
+            <input type="number" id="whishAward" v-model.number="whishAward" min="0" max="5">
+            
+            <label for="doubleAward">两个相同乌龟奖励：</label>
+            <input type="number" id="doubleAward" v-model.number="doubleAward" min="0" max="5">
+            
+            <label for="tripleAward">连线乌龟奖励：</label>
+            <input type="number" id="tripleAward" v-model.number="tripleAward" min="0" max="10">
+            
+            <label for="clearAward">清台奖励：</label>
+            <input type="number" id="clearAward" v-model.number="clearAward" min="0" max="10">
+            
             <button @click="drawTurtles">开始抽取</button>
         </div>
     
@@ -33,6 +54,7 @@
     
         <!-- 右侧乌龟列表 -->
         <div class="right-panel">
+            <button @click="clearTurtleList">清除列表</button>
             <h2>已抽到的乌龟列表</h2>
             <ul>
                 <li v-for="(turtle, index) in drawnTurtles" :key="index">
